@@ -4,6 +4,6 @@ export default {
   },
 
   dummy: function(req, res, next){
-    res.send('dummy stubbed');
+    res.send('A votable item');
   }
 }
