@@ -1,7 +1,9 @@
-const votableController = require('./votableController');
+import votableController from './votableController';
 
-module.exports = (app => {
+export default app => {
   app.route('/')
-    .get(votableController.dummy);
-})
+    .get(votableController.dummy)
+    .post(votableController.newVotable);
+
+};
 
