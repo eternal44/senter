@@ -1,0 +1,24 @@
+{
+  "name": "senter",
+  "version": "0.0.1",
+  "description": "Tinder meets Pinterest",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:server": "nodemon server/server.js --exec babel-node"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/eternal44/senter"
+  },
+  "author": "James Youn <jamesyoun710@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.6.0",
+    "express": "^4.13.4",
+    "path": "^0.12.7"
+  },
+  "babel": {
+    "presets": ["es2015"]
+  }
+}
