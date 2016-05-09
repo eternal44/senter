@@ -1,1 +1,1 @@
-web: node dserver/server.js
+web: npm start
