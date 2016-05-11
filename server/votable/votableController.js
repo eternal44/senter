@@ -6,12 +6,16 @@ export default {
   },
 
   fetchVotable: function(req, res, next){
-    db.any("select * from votables")
-      .then((data) => {
-        res.send(data);
-      })
-      .catch((error) => {
-        console.log('No votable found.  Error: ', error);
-      })
+    // change to query from redis
+  },
+
+  fetchUnvotedVotables: function( req, res, next ){
+    db.many("SELECT * FROM votables LEFT JOIN votes ON votables.id = votes.votable_id WHERE voter IS null OR voter !=1")
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((error) => {
+      console.log('No votable found. Error: ', error);
+    })
   }
 }
