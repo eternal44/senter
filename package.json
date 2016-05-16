@@ -5,7 +5,7 @@
   "main": "server/server.js",
   "scripts": {
     "start": "node dserver/server.js",
-    "test:server": "nodemon specs/votableRoutes.js --exec babel-node",
+    "test:server": "nodemon specs/votableRoutes.js --exec babel-node | tap-spec",
     "start:dev": "nodemon server/server.js --exec babel-node",
     "build": "rm -rf dserver && babel server --out-dir dserver",
     "postinstall": "rm -rf dserver && babel server --out-dir dserver",

@@ -29,7 +29,7 @@ export default {
 
   upvote: function (req, res, next ){
     const data = {
-      votableID: req.body.votableID,
+      votableID: req.param.votableID,
       voter: req.body.voter,
       upvote: req.body.upvote
     }
