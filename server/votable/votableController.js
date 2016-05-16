@@ -6,8 +6,9 @@ export default {
   },
 
   fetchVotable: function(req, res, next){
-    const votableId = req.params.votableId;
-    db.one("SELECT * FROM votables WHERE id=${votableId}", {votableId: votableId})
+    const votableID = req.params.votableID;
+
+    db.oneOrNone("SELECT votables.id, name, SUM(upvote) AS upvotes, SUM(downvote) AS downvotes from votables left JOIN votes ON votables.id = votes.votable_id where votables.id=${votableID} GROUP BY votables.id, name", {votableID: votableID})
     .then(function (row){
       res.send(row)
     })
@@ -24,5 +25,16 @@ export default {
     .catch((error) => {
       console.log('No votable found. Error: ', error);
     })
+  },
+
+  upvote: function (req, res, next ){
+    const data = {
+      votableID: req.body.votableID,
+      voter: req.body.voter,
+      upvote: req.body.upvote
+    }
+  },
+
+  downvote: function (req, res, next ){
   }
 }
