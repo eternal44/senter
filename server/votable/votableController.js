@@ -6,7 +6,14 @@ export default {
   },
 
   fetchVotable: function(req, res, next){
-    // change to query from redis
+    const votableId = req.params.votableId;
+    db.one("SELECT * FROM votables WHERE id=${votableId}", {votableId: votableId})
+    .then(function (row){
+      res.send(row)
+    })
+    .catch(function(error){
+      console.log('#fetchVotable Error: ', error)
+    })
   },
 
   fetchUnvotedVotables: function( req, res, next ){
