@@ -26,66 +26,82 @@ test('GET /api/votables/users/:user_id', assert => {
   })
 })
 
-// extract repeated code for these post requests 
-test('Upvote', assert => {
-  const voteParameters = {
-    voter: 1,
-    upvote: 1
-  }
-
+test('GET /api/votables/1', assert => {
   request(app)
-  .post('/api/votables/1')
-  .send(voteParameters)
-  .expect(201)
+  .get('/api/votables/1')
+  .expect(200)
   .expect('Content-Type', /json/)
   .end((err, res) => {
-    let expectedItems = voteParameters;
-    let actualItems = res.body;
+    let expectedVotable = 'item1';
+    let actualVotable = res.body.name;
 
     assert.error(err, 'No error');
-    assert.same(actualItems, expectedItems, 'Retrieve unvoted votables');
+    assert.same(actualVotable, expectedVotable, 'Retrieve first votable');
     assert.end();
   })
 })
 
-test('Downvote', assert => {
-  const voteParameters = {
-    voter: 1,
-    downvote: 1
-  }
 
-  request(app)
-  .post('/api/votables/1')
-  .send(voteParameters)
-  .expect(201)
-  .expect('Content-Type', /json/)
-  .end((err, res) => {
-    let expectedItems = voteParameters;
-    let actualItems = res.body;
+// // extract repeated code for these post requests 
+// test('Upvote', assert => {
+//   const voteParameters = {
+//     voter: 1,
+//     upvote: 1
+//   }
 
-    assert.error(err, 'No error');
-    assert.same(actualItems, expectedItems, 'Retrieve unvoted votables');
-    assert.end();
-  })
-})
+//   request(app)
+//   .post('/api/votables/1')
+//   .send(voteParameters)
+//   .expect(201)
+//   .expect('Content-Type', /json/)
+//   .end((err, res) => {
+//     let expectedItems = voteParameters;
+//     let actualItems = res.body;
 
-test('Upvote with weighted vote', assert => {
-  const voteParameters = {
-    voter: 1,
-    upvote: 3
-  }
+//     assert.error(err, 'No error');
+//     assert.same(actualItems, expectedItems, 'Retrieve unvoted votables');
+//     assert.end();
+//   })
+// })
 
-  request(app)
-  .post('/api/votables/1')
-  .send(voteParameters)
-  .expect(201)
-  .expect('Content-Type', /json/)
-  .end((err, res) => {
-    let expectedItems = voteParameters;
-    let actualItems = res.body;
+// test('Downvote', assert => {
+//   const voteParameters = {
+//     voter: 1,
+//     downvote: 1
+//   }
 
-    assert.error(err, 'No error');
-    assert.same(actualItems, expectedItems, 'Retrieve unvoted votables');
-    assert.end();
-  })
-})
+//   request(app)
+//   .post('/api/votables/1')
+//   .send(voteParameters)
+//   .expect(201)
+//   .expect('Content-Type', /json/)
+//   .end((err, res) => {
+//     let expectedItems = voteParameters;
+//     let actualItems = res.body;
+
+//     assert.error(err, 'No error');
+//     assert.same(actualItems, expectedItems, 'Retrieve unvoted votables');
+//     assert.end();
+//   })
+// })
+
+// test('Upvote with weighted vote', assert => {
+//   const voteParameters = {
+//     voter: 1,
+//     upvote: 3
+//   }
+
+//   request(app)
+//   .post('/api/votables/1')
+//   .send(voteParameters)
+//   .expect(201)
+//   .expect('Content-Type', /json/)
+//   .end((err, res) => {
+//     let expectedItems = voteParameters;
+//     let actualItems = res.body;
+
+//     assert.error(err, 'No error');
+//     assert.same(actualItems, expectedItems, 'Retrieve unvoted votables');
+//     assert.end();
+//   })
+// })
