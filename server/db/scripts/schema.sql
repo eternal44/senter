@@ -1,7 +1,7 @@
 /*
 NOTE:
 User types are defined by their demographics
-  ex: suburban mother
+  like: suburban mother
 
 Votable types are defined by their categories
   ex: jeans

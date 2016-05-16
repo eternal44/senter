@@ -10,7 +10,7 @@ export default {
   },
 
   fetchUnvotedVotables: function( req, res, next ){
-    db.many("SELECT * FROM votables LEFT JOIN votes ON votables.id = votes.votable_id WHERE voter IS null OR voter !=1")
+    db.many("SELECT * FROM votables LEFT JOIN votes ON votables.id = votes.votable_id WHERE voter IS null OR voter !=1 LIMIT 10")
     .then((data) => {
       res.send(data);
     })
