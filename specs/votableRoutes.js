@@ -42,3 +42,26 @@ test('GET /api/votables/1', assert => {
   })
 })
 
+// extract repeated code for these post requests 
+test('Upvote', assert => {
+  const voteParameters = {
+    voter: 1,
+    upvote: 1
+  }
+
+  request(app)
+  .post('/api/votables/1/upvote')
+  .send(voteParameters)
+  .expect(201)
+  .expect('Content-Type', /json/)
+  .end((err, res) => {
+
+    // in votables controller - res.send(/*new upvotes count*/)
+    const actualUpvotesCount = parseInt(res.body.upvotes);
+
+    assert.error(err, 'No error');
+    assert.same(actualUpvotesCount, 2);
+    assert.end();
+  })
+})
+
