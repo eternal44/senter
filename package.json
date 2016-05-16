@@ -8,7 +8,9 @@
     "test:server": "nodemon specs/votableRoutes.js --exec babel-node",
     "start:dev": "nodemon server/server.js --exec babel-node",
     "build": "rm -rf dserver && babel server --out-dir dserver",
-    "postinstall": "rm -rf dserver && babel server --out-dir dserver"
+    "postinstall": "rm -rf dserver && babel server --out-dir dserver",
+    "db:schema": "psql senter < server/db/scripts/schema.sql",
+    "db:mock": "psql senter < server/db/scripts/mockData.sql"
   },
   "repository": {
     "type": "git",

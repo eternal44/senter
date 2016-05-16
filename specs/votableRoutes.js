@@ -1,6 +1,15 @@
 import test from 'tape';
 import request from 'supertest';
 import app from '../server/server.js';
+const exec = require('child_process').exec;
+
+test('SETUP: insert mocks  DB', t => {
+  exec('npm run db:schema',
+       (error, stdout, stderr) => {
+         exec('npm run db:mock')
+       });
+       t.end();
+});
 
 test('GET /api/votables/users/:user_id', assert => {
   request(app)
@@ -20,7 +29,6 @@ test('GET /api/votables/users/:user_id', assert => {
 // extract repeated code for these post requests 
 test('Upvote', assert => {
   const voteParameters = {
-    votableID: 1,
     voter: 1,
     upvote: 1
   }
@@ -42,7 +50,6 @@ test('Upvote', assert => {
 
 test('Downvote', assert => {
   const voteParameters = {
-    votableID: 1,
     voter: 1,
     downvote: 1
   }
@@ -64,7 +71,6 @@ test('Downvote', assert => {
 
 test('Upvote with weighted vote', assert => {
   const voteParameters = {
-    votableID: 1,
     voter: 1,
     upvote: 3
   }

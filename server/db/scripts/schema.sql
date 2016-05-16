@@ -68,7 +68,7 @@ CREATE TABLE votes (
   voter INTEGER,
   upvote INTEGER DEFAULT 0,
   downvote INTEGER DEFAULT 0,
-  FOREIGN KEY (votable_id) REFERENCES votables(id),
+  FOREIGN KEY (votable_id) REFERENCES votables(id) ON DELETE CASCADE,
   FOREIGN KEY (voter) REFERENCES users(id)
 );
 
@@ -90,8 +90,8 @@ CREATE TABLE votable_tags (
   id SERIAL PRIMARY KEY,
   votable_id INTEGER,
   tag_id INTEGER,
-  FOREIGN KEY (votable_id) REFERENCES votables(id),
-  FOREIGN KEY (tag_id) REFERENCES tag_types(id)
+  FOREIGN KEY (votable_id) REFERENCES votables(id) ON DELETE CASCADE,
+  FOREIGN KEY (tag_id) REFERENCES tag_types(id) ON DELETE CASCADE
 );
 
 
@@ -106,7 +106,7 @@ CREATE TABLE categories (
   name VARCHAR(30)
 );
 
-DROP TABLE IF EXISTS votable_categories CASCADE;
+DROP TABLE IF EXISTS votable_categorizations CASCADE;
 CREATE TABLE votable_categorizations (
   id SERIAL PRIMARY KEY,
   votable_id INTEGER,
