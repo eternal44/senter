@@ -18,6 +18,7 @@ export default {
   },
 
   fetchUnvotedVotables: function( req, res, next ){
+    // TODO: change out hard coded user id to req.param._____
     db.many("SELECT * FROM votables LEFT JOIN votes ON votables.id = votes.votable_id WHERE voter IS null OR voter !=1 LIMIT 10")
     .then((data) => {
       res.send(data);
@@ -28,13 +29,35 @@ export default {
   },
 
   upvote: function (req, res, next ){
-    const data = {
-      votableID: req.param.votableID,
+    const params = {
+      votableID: req.params.votableID,
       voter: req.body.voter,
       upvote: req.body.upvote
     }
+
+    db.none('INSERT INTO votes (votable_id, voter, upvote) VALUES (${votableID}, ${voter}, ${upvote})', params)
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch((error) => {
+      console.log('Item couldn\'t be upvoted');
+      res.sendStatus(500)
+    })
   },
 
-  downvote: function (req, res, next ){
-  }
+  // downvote: function (req, res, next ){
+  //   const data = {
+  //     votableID: req.params.votableID,
+  //     voter: req.body.voter,
+  //     downvote: req.body.downvote
+  //   }
+  //   db.one("INSERT INTO votes (votable_id, voter, downvote) VALUES (${votableID}, ${voter}, ${downvote})", data)
+  //   .then(() => {
+  //     res.sendStatus(201);
+  //   })
+  //   .catch((error) => {
+  //     console.log('Item couldn\'t be downvoted');
+  //     res.sendStatus(500)
+  //   })
+  // }
 }
