@@ -18,8 +18,8 @@ export default {
   },
 
   fetchUnvotedVotables: function( req, res, next ){
-    // TODO: change out hard coded user id to req.param._____
-    db.many("SELECT * FROM votables LEFT JOIN votes ON votables.id = votes.votable_id WHERE voter IS null OR voter !=1 LIMIT 10")
+    const userID = req.params.userID;
+    db.many("SELECT * FROM votables LEFT JOIN votes ON votables.id = votes.votable_id WHERE voter IS null OR voter !=$1 LIMIT 50", userID)
     .then((data) => {
       res.send(data);
     })
