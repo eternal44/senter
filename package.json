@@ -5,8 +5,8 @@
   "main": "server/server.js",
   "scripts": {
     "start": "node dserver/server.js",
-    "test": "babel-tape-runner specs/*.js | tap-spec",
-    "watch": "nodemon -q -x 'npm test'",
+    "test": "babel-tape-runner specs/*.js",
+    "watch": "nodemon -q -x 'npm test | tap-spec'",
     "start:dev": "nodemon server/server.js --exec babel-node",
     "build": "rm -rf dserver && babel server --out-dir dserver",
     "postinstall": "rm -rf dserver && babel server --out-dir dserver",
@@ -20,6 +20,7 @@
   "author": "James Youn <jamesyoun710@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "babel-tape-runner": "^2.0.1",
     "supertest": "^1.2.0",
     "tape": "^4.5.1"
   },

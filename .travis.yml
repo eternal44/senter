@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+  - '5'
+services:
+  - postgresql
+before_install:
+  - npm install -g npm@2.0.0
+cache:
+  directories:
+    - node_modules
+notifications:
+  email: false
+before_script:
+  - npm install babel-tape-runner -g
+  - psql -c 'create database senter;' -U postgres
+script:
+  - npm run test
+
