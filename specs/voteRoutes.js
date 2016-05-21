@@ -32,7 +32,8 @@ test('Check votable votes before new votes', assert => {
 })
 
 test('Process a batch of votes from client', assert => {
-  const votes = mockVotes[2];
+  const votes = mockVotes;
+
   request(app)
   .post('/api/votes/')
   .send(votes)
@@ -56,8 +57,8 @@ test('Check votable votes after new votes', assert => {
 
     assert.error(err, 'No error');
     assert.same(actualVotable, 'item1', 'Retrieve first votable');
-    assert.same(downvotes, 2, 'Check downvotes total');
-    assert.same(upvotes, 2, 'Check upvotes total');
+    assert.same(downvotes, 3, 'Check downvotes total');
+    assert.same(upvotes, 1, 'Check upvotes total');
     assert.end();
   })
 })
