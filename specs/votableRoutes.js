@@ -18,11 +18,11 @@ test('Fetch unvoted votables', assert => {
   .expect(200)
   .expect('Content-Type', /json/)
   .end((err, res) => {
-    let expectedItems = null;
-    let actualItems = res.body[1].downvote;
+    const actualVotablesCount = res.body.length;
+    const expectedVotablesCount = 20;
 
     assert.error(err, 'No error');
-    assert.same(actualItems, expectedItems, 'Retrieve unvoted votables');
+    assert.same(actualVotablesCount, expectedVotablesCount, 'Retrieve unvoted votables');
     assert.end();
   })
 })

@@ -19,12 +19,13 @@ export default {
 
   fetchUnvotedVotables: function( req, res, next ){
     const userID = req.params.userID;
-    db.many("SELECT * FROM votables LEFT JOIN votes ON votables.id = votes.votable_id WHERE voter IS null OR voter !=$1 LIMIT 50", userID)
+    db.many("SELECT name, make, photo_url FROM votables LEFT JOIN votes ON votables.id = votes.votable_id WHERE voter IS null OR voter !=$1 LIMIT 20", userID)
     .then((data) => {
       res.send(data);
     })
     .catch((error) => {
-      console.log('No votable found. Error: ', error);
+      console.log('No votables found. Error: ', error);
+      res.send('No votables found!')
     })
   },
 

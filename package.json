@@ -5,6 +5,8 @@
   "main": "server/server.js",
   "scripts": {
     "start": "node dserver/server.js",
+    "test": "babel-tape-runner specs/**/*.js",
+    "test:watch": "npm run test",
     "test:server": "nodemon specs/votableRoutes.js --exec babel-node | tap-spec",
     "start:dev": "nodemon server/server.js --exec babel-node",
     "build": "rm -rf dserver && babel server --out-dir dserver",
