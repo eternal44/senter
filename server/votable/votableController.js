@@ -28,37 +28,4 @@ export default {
       res.send('No votables found!')
     })
   },
-
-  upvote: function (req, res, next ){
-    const data = {
-      votableID: req.params.votableID,
-      voter: req.body.voter,
-      upvote: req.body.upvote
-    }
-
-    db.none('INSERT INTO votes (votable_id, voter, upvote) VALUES (${votableID}, ${voter}, ${upvote})', data)
-    .then(() => {
-      res.sendStatus(201);
-    })
-    .catch((error) => {
-      console.log('Item couldn\'t be upvoted');
-      res.sendStatus(500)
-    })
-  },
-
-  downvote: function (req, res, next ){
-    const data = {
-      votableID: req.params.votableID,
-      voter: req.body.voter,
-      downvote: req.body.downvote
-    }
-    db.none('INSERT INTO votes (votable_id, voter, downvote) VALUES (${votableID}, ${voter}, ${downvote})', data)
-    .then(() => {
-      res.sendStatus(201);
-    })
-    .catch((error) => {
-      console.log('Item couldn\'t be downvoted');
-      res.sendStatus(500)
-    })
-  }
 }
