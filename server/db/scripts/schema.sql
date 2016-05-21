@@ -49,8 +49,10 @@ CREATE TABLE user_demographics (
 DROP TABLE IF EXISTS votables CASCADE;
 CREATE TABLE votables (
   id SERIAL PRIMARY KEY,
-  name VARCHAR(50),
   user_id INTEGER,
+  name VARCHAR(50),
+  make VARCHAR(50),
+  photo_url VARCHAR(200),
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
