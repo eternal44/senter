@@ -2,27 +2,47 @@ import db from './../db/config/init'
 
 export default {
   recordVote: function (req, res, next ){
-    // write a transaction that:
-    // queries a user's vote weight and
-    // generates a query that votes for or against a votable depending on the req.body.vote boolean
+    const userID = req.body[0].userID;
+    let queries = [];
+    const votes = req.body;
 
     return db.tx(function(t){
-      const votes = req.body;
+      // get a user's vote weight and
+      return t.one('SELECT vote_weight FROM users WHERE id=$1', userID)
+      .catch(function(err){
+        console.log('Invalid user ID');
+        res.status(404).send(err)
+      })
+      .then(function(data){
+        votes.forEach(function(vote) {
+          // console.log('promise:', vote, 'vote weight: ', userVoteWeight);
+          let upvote = 0;
+          let downvote = 0;
 
-      votes.forEach(function(vote) {
-        // rebuild the vote object here
-        queries.push(t.none('INSERT INTO votes (votable_id, voter, upvote, downvote) VALUES (${votableID}, ${voter}, ${upvote}, ${downvote})', vote));
-      });
-      return t.batch(queries);
-    })
+          if(vote.vote){
+            upvote = data.vote_weight;
+          } else {
+            downvote = data.vote_weight;
+          }
 
-    // refactor the code below
-    .then(() => {
-      res.sendStatus(201);
-    })
-    .catch((error) => {
-      console.log('Item couldn\'t be upvoted');
-      res.sendStatus(500)
+          const inputParam = {
+            votableID: vote.votableID,
+            voter: vote.userID,
+            upvote: upvote,
+            downvote: downvote
+          };
+
+          queries.push(t.none('INSERT INTO votes (votable_id, voter, upvote, downvote) VALUES (${votableID}, ${voter}, ${upvote}, ${downvote})', inputParam));
+        })
+        return t.batch(queries);
+      })
+      .catch(function(err){
+        console.log('Votes could not be stored');
+        res.status(500).send(err);
+      })
+      .then(() => {
+        res.sendStatus(201);
+      })
     })
   }
 }
