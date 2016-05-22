@@ -8,7 +8,10 @@ export default {
   fetchVotable: function(req, res, next){
     const votableID = req.params.votableID;
 
-    db.oneOrNone("SELECT votables.id, name, SUM(upvote) AS upvotes, SUM(downvote) AS downvotes from votables left JOIN votes ON votables.id = votes.votable_id where votables.id=${votableID} GROUP BY votables.id, name", {votableID: votableID})
+    db.oneOrNone(['SELECT votables.id, name, SUM(upvote) AS upvotes, ',
+                 'SUM(downvote) AS downvotes from votables LEFT JOIN votes ',
+                 'ON votables.id = votes.votable_id where votables.id=${votableID} ',
+                 'GROUP BY votables.id, name'].join(''), {votableID: votableID})
     .then(function (row){
       res.send(row)
     })
@@ -19,7 +22,9 @@ export default {
 
   fetchUnvotedVotables: function( req, res, next ){
     const userID = req.params.userID;
-    db.many("SELECT name, make, photo_url FROM votables LEFT JOIN votes ON votables.id = votes.votable_id WHERE voter IS null OR voter !=$1 LIMIT 20", userID)
+    db.many(['SELECT name, make, photo_url FROM votables LEFT JOIN votes ',
+            'ON votables.id = votes.votable_id ',
+            'WHERE voter IS null OR voter !=$1 LIMIT 20'].join(''), userID)
     .then((data) => {
       res.send(data);
     })

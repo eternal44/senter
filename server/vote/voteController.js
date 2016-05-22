@@ -32,7 +32,9 @@ export default {
             downvote: downvote
           };
 
-          queries.push(t.none('INSERT INTO votes (votable_id, voter, upvote, downvote) VALUES (${votableID}, ${voter}, ${upvote}, ${downvote})', inputParam));
+          queries.push(t.none(['INSERT INTO votes (votable_id, voter, upvote, downvote) ',
+                              'VALUES (${votableID}, ${voter}, ${upvote}, ${downvote})'].join('')
+                              , inputParam));
         })
         return t.batch(queries);
       })

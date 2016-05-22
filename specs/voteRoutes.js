@@ -1,8 +1,10 @@
 import test from 'tape';
 import request from 'supertest';
 import app from '../server/server.js';
-import mockVotes from '../specHelpers/mockVotes';
 const exec = require('child_process').exec;
+
+
+import mockVotes from './fixtures/mockVotes';
 
 test('SETUP: insert mocks  DB', t => {
   exec('npm run db:schema',
