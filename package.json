@@ -4,15 +4,18 @@
   "description": "A rapid data collecting application.  Think Tinder meets Pinterest",
   "main": "server/server.js",
   "scripts": {
-    "start": "node dserver/server.js",
+    "db:schema": "psql senter < server/db/scripts/schema.sql",
+    "db:mock": "psql senter < server/db/scripts/mockData.sql",
     "test": "babel-tape-runner specs/*.js",
     "lint": "eslint .",
-    "watch": "nodemon -q -x 'npm test | tap-spec'",
-    "start:dev": "nodemon server/server.js --exec babel-node",
-    "build": "rm -rf dserver && babel server --out-dir dserver",
+    "watch:server": "nodemon -q -x 'npm test | tap-spec'",
+    "start:dev": "nodemon server/server.js --exec babel-node ",
+    "build:server": "rm -rf dserver && babel server --out-dir dserver",
     "postinstall": "rm -rf dserver && babel server --out-dir dserver",
-    "db:schema": "psql senter < server/db/scripts/schema.sql",
-    "db:mock": "psql senter < server/db/scripts/mockData.sql"
+    "start": "node dserver/server.js",
+    "build:client": "rm -rf dclient && mkdir dclient && npm run build:clientJS",
+    "build:clientJS": "browserify client/index.js -t babelify -o dclient/index.js",
+    "watch:client": "watchify client/index.js -t babelify -o dclient/index.js"
   },
   "repository": {
     "type": "git",
@@ -21,9 +24,13 @@
   "author": "James Youn <jamesyoun710@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "babel-preset-react": "^6.5.0",
     "babel-tape-runner": "^2.0.1",
+    "babelify": "^7.3.0",
+    "browserify": "^13.0.1",
     "supertest": "^1.2.0",
-    "tape": "^4.5.1"
+    "tape": "^4.5.1",
+    "watchify": "^3.7.0"
   },
   "dependencies": {
     "babel-cli": "^6.8.0",
@@ -37,12 +44,14 @@
     "pg-promise": "^4.0.10",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
+    "react-redux": "^4.4.5",
     "react-router": "^2.4.1",
     "redux": "^3.5.2"
   },
   "babel": {
     "presets": [
-      "es2015"
+      "es2015",
+      "react"
     ]
   }
 }

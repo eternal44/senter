@@ -48,4 +48,4 @@ export default [
   {userID: 2, votableID: 20, vote: true}
 ];
 
-console.log(createVotes(20, 2, 0));
+// console.log(createVotes(20, 2, 0));
