@@ -14,8 +14,6 @@ middleware(app, express, join);
 
 const port = process.env.PORT || 3000;
 
-app.use(express.static(join(__dirname, '../client')));
-
 if(require.main === module) {
   app.listen(port, () => {
     console.log('Listening on port ', port)
