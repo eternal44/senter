@@ -14,10 +14,10 @@ middleware(app, express, join);
 
 const port = process.env.PORT || 3000;
 
-if(require.main === module) {
+if (require.main === module) {
   app.listen(port, () => {
-    console.log('Listening on port ', port)
-  })
+    console.log('Listening on port ', port);
+  });
 }
 
 export default app;

@@ -6,9 +6,9 @@ const exec = require('child_process').exec;
 test('SETUP: insert mocks  DB', t => {
   exec('npm run db:schema',
        (error, stdout, stderr) => {
-         exec('npm run db:mock', function(err, res){
+         exec('npm run db:mock', function(err, res) {
            t.end();
-         })
+         });
        });
 });
 
@@ -24,5 +24,5 @@ test('Fetch unvoted votables', assert => {
     assert.error(err, 'No error');
     assert.same(actualVotablesCount, expectedVotablesCount, 'Retrieve unvoted votables');
     assert.end();
-  })
-})
+  });
+});

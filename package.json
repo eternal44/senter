@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dserver/server.js",
     "test": "babel-tape-runner specs/*.js",
-    "lint": "jshint --exclude ./node_modules .",
+    "lint": "eslint .",
     "watch": "nodemon -q -x 'npm test | tap-spec'",
     "start:dev": "nodemon server/server.js --exec babel-node",
     "build": "rm -rf dserver && babel server --out-dir dserver",

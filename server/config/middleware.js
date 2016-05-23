@@ -2,9 +2,9 @@ import morgan from 'morgan';
 import votableRoutes from '../votable/votableRoutes';
 import voteRoutes from '../vote/voteRoutes';
 import bodyParser from 'body-parser';
-import { join } from 'path';
+import {join} from 'path';
 
-export default (app, express, join) =>{
+export default (app, express) => {
   const votableRouter = express.Router();
   const voteRouter = express.Router();
 
@@ -20,4 +20,4 @@ export default (app, express, join) =>{
 
   votableRoutes(votableRouter);
   voteRoutes(voteRouter);
-}
+};

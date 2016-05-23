@@ -1,17 +1,15 @@
 import test from 'tape';
 import request from 'supertest';
 import app from '../server/server.js';
-const exec = require('child_process').exec;
-
-
 import mockVotes from './fixtures/mockVotes';
+const exec = require('child_process').exec;
 
 test('SETUP: insert mocks  DB', t => {
   exec('npm run db:schema',
        (error, stdout, stderr) => {
-         exec('npm run db:mock', function(err, res){
+         exec('npm run db:mock', function(err, res) {
            t.end();
-         })
+         });
        });
 });
 
@@ -30,8 +28,8 @@ test('Check votable votes before new votes', assert => {
     assert.same(downvotes, 2, 'Check downvotes total');
     assert.same(upvotes, 1, 'Check upvotes total');
     assert.end();
-  })
-})
+  });
+});
 
 test('Process a batch of votes from client', assert => {
   const votes = mockVotes;
@@ -44,8 +42,8 @@ test('Process a batch of votes from client', assert => {
   .end((err, res) => {
     assert.error(err, 'No error');
     assert.end();
-  })
-})
+  });
+});
 
 test('Check votable votes after new votes', assert => {
   request(app)
@@ -62,5 +60,5 @@ test('Check votable votes after new votes', assert => {
     assert.same(downvotes, 3, 'Check downvotes total');
     assert.same(upvotes, 1, 'Check upvotes total');
     assert.end();
-  })
-})
+  });
+});
