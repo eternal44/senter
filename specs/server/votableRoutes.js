@@ -1,6 +1,6 @@
 import test from 'tape';
 import request from 'supertest';
-import app from '../server/server.js';
+import app from '../../server/server.js';
 const exec = require('child_process').exec;
 
 test('SETUP: insert mocks  DB', t => {

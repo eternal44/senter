@@ -6,15 +6,15 @@
   "scripts": {
     "db:schema": "psql senter < server/db/scripts/schema.sql",
     "db:mock": "psql senter < server/db/scripts/mockData.sql",
-    "test": "babel-tape-runner specs/*.js",
+    "test:server": "babel-tape-runner specs/server/**/*.js",
     "lint": "eslint .",
-    "watch:server": "nodemon -q -x 'npm test | tap-spec'",
-    "start:dev": "nodemon server/server.js --exec babel-node ",
+    "start:dev": "nodemon --exec babel-node server/server.js",
+    "test:dev": "nodemon --exec babel-node -q -x 'npm run test:server | tap-spec'",
     "build:server": "rm -rf dserver && babel server --out-dir dserver",
     "postinstall": "rm -rf dserver && babel server --out-dir dserver",
     "start": "node dserver/server.js",
     "build:client": "rm -rf dclient && mkdir dclient && npm run build:clientJS",
-    "build:clientJS": "browserify client/index.js -t babelify -o dclient/index.js",
+    "build:clientJS": "browserify client/app.js -t babelify -o dclient/app.js",
     "watch:client": "watchify client/index.js -t babelify -o dclient/index.js"
   },
   "repository": {

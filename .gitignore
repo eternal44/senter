@@ -2,6 +2,7 @@ node_modules
 npm-debug.log*
 .env
 dserver
+dclient
 notes.md
 dump.rdb
 
