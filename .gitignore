@@ -3,6 +3,7 @@ npm-debug.log*
 .env
 dserver
 dclient
+dist
 notes.md
 dump.rdb
 

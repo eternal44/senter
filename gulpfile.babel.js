@@ -25,14 +25,14 @@ import ghPages from 'gulp-gh-pages';
 
 const paths = {
   bundle: 'app.js',
-  entry: 'client/app.js',
-  srcCss: 'client/**/*.scss',
-  srcImg: 'client/images/**',
-  srcLint: ['client/**/*.js', 'specs/**/*.js'],
-  dist: 'dclient',
-  distJs: 'dclient/js',
-  distImg: 'dclient/images',
-  distDeploy: './dclient/**/*'
+  entry: 'src/Index.js',
+  srcCss: 'src/**/*.scss',
+  srcImg: 'src/images/**',
+  srcLint: ['src/**/*.js', 'test/**/*.js'],
+  dist: 'dist',
+  distJs: 'dist/js',
+  distImg: 'dist/images',
+  distDeploy: './dist/**/*'
 };
 
 const customOpts = {
@@ -98,8 +98,8 @@ gulp.task('styles', () => {
 });
 
 gulp.task('htmlReplace', () => {
-  gulp.src('client/index.html')
-  .pipe(htmlReplace({ css: 'styles/main.css', js: 'client/app.js' }))
+  gulp.src('index.html')
+  .pipe(htmlReplace({ css: 'styles/main.css', js: 'js/app.js' }))
   .pipe(gulp.dest(paths.dist));
 });
 
@@ -137,4 +137,3 @@ gulp.task('build', cb => {
   process.env.NODE_ENV = 'production';
   runSequence('clean', ['browserify', 'styles', 'htmlReplace', 'images'], cb);
 });
-
