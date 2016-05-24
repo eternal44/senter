@@ -11,9 +11,14 @@ export default (app, express) => {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({extended: true}));
 
-  app.use(express.static(join(__dirname, './../../client')));
+  app.use(express.static(join(__dirname, './../../')));
+
+  app.use('/', express.static('./../../src'));
   app.use('/scripts', express.static(join(__dirname, './../../node_modules')));
   app.use(morgan('dev'));
+
+  // pathing correct?
+  app.get('/', function(req, res){ res.sendfile(__dirname + './../../index.html', [], null);  });
 
   app.use('/api/votables', votableRouter);
   app.use('/api/votes', voteRouter);
