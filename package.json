@@ -12,10 +12,14 @@
     "db:mock": "psql senter < server/db/scripts/mockData.sql",
     "test:server": "babel-tape-runner specs/server/**/*.js",
     "lint": "eslint .",
-    "start:dev": "nodemon --exec babel-node server/server.js",
+    "watch": "npm run watch:server & npm run watch:client & wait",
+    "watch:server": "nodemon --exec babel-node --ignore dclient/bundle.js -- server/server.js",
+    "watch:client": "watchify client/site.js -v -t babelify -g envify -p livereactload -o dclient/bundle.js",
     "test:dev": "nodemon --exec babel-node -q -x 'npm run test:server | tap-spec'",
     "build:server": "rm -rf dserver && babel server -d dserver",
+    "build:client": "browserify src/Index.js -o dclient/js/bundle.js -t [babelify --presets [es2015 react]]",
     "start": "node dserver/server.js",
+    "bundle:prod": "browserify client/site.js -t babelify -g envify -o dclient/bundle.js",
     "postinstall": "npm run build:server && gulp build"
   },
   "repository": {
@@ -25,61 +29,57 @@
   "author": "James Youn <jamesyoun710@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "babel-tape-runner": "^2.0.1",
+    "babelify": "^7.3.0",
+    "browserify": "^13.0.1",
     "eslint": "^2.10.2",
     "eslint-config-google": "^0.5.0",
+    "livereactload": "2.2.3",
+    "react-proxy": "1.1.8",
+    "serve": "1.4.0",
     "supertest": "^1.2.0",
     "tap-nyan": "0.0.2",
-    "tape": "^4.5.1"
+    "tape": "^4.5.1",
+    "watchify": "3.7.0"
   },
   "dependencies": {
-    "autoprefixer": "^6.3.6",
     "babel-cli": "^6.8.0",
+    "babel-plugin-react-transform": "2.0.2",
     "babel-preset-es2015": "^6.6.0",
     "babel-preset-react": "6.5.0",
-    "babelify": "^7.3.0",
     "body-parser": "^1.15.1",
     "bootstrap": "^3.3.6",
-    "browser-sync": "2.12.10",
-    "browserify": "^13.0.1",
-    "cssnano": "3.6.2",
     "dotenv": "^2.0.0",
+    "envify": "3.4.0",
     "express": "^4.13.4",
-    "gulp": "3.9.1",
-    "gulp-cli": "^1.2.1",
-    "gulp-eslint": "^2.0.0",
-    "gulp-gh-pages": "^0.5.4",
-    "gulp-html-replace": "^1.5.5",
-    "gulp-imagemin": "^3.0.1",
-    "gulp-notify": "^2.2.0",
-    "gulp-postcss": "^6.1.1",
-    "gulp-rename": "^1.2.2",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-uglify": "^1.5.3",
-    "imagemin-pngquant": "^5.0.0",
-    "lodash": "^4.13.1",
     "morgan": "^1.7.0",
     "path": "^0.12.7",
     "pg-promise": "^4.0.10",
-    "postcss-nested": "^1.0.0",
-    "postcss-simple-extend": "^1.0.0",
-    "postcss-simple-vars": "^2.0.0",
     "react": "^15.1.0",
     "react-addons-test-utils": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-redux": "^4.4.5",
     "react-router": "^2.4.1",
     "redux": "^3.5.2",
-    "rimraf": "^2.5.2",
-    "run-sequence": "^1.2.1",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0",
-    "watchify": "3.7.0"
+    "redux-thunk": "2.1.0",
+    "uglifyify": "3.0.1"
   },
   "babel": {
     "presets": [
       "es2015",
       "react"
+    ]
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015",
+            "react"
+          ]
+        }
+      ]
     ]
   }
 }

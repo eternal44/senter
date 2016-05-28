@@ -4,6 +4,9 @@ import voteRoutes from '../vote/voteRoutes';
 import bodyParser from 'body-parser';
 import {join} from 'path';
 
+// //example code.  uncomment this line if page doesn't load
+// import React from 'react';
+
 export default (app, express) => {
   const votableRouter = express.Router();
   const voteRouter = express.Router();
@@ -13,12 +16,28 @@ export default (app, express) => {
 
   app.use(express.static(join(__dirname, './../../')));
 
-  app.use('/', express.static('./../../src'));
+  app.use('/', express.static('./../../client'));
   app.use('/scripts', express.static(join(__dirname, './../../node_modules')));
   app.use(morgan('dev'));
 
-  // pathing correct?
-  app.get('/', function(req, res){ res.sendfile(__dirname + './../../index.html', [], null);  });
+  // example code
+  app.get("/", (req, res) => {
+    res.send(`<!DOCTYPE html>
+    <html>
+      <head>
+        <title>2.x Flux with redux</title>
+      </head>
+      <body>
+        <div id="root"></div>
+        <script type="text/javascript" src="/static/bundle.js"></script>
+      </body>
+    </html>`)
+  })
+
+  // example code
+  app.get("/static/bundle.js", function(req, res) {
+    res.sendFile("bundle.js", {root: __dirname})
+  })
 
   app.use('/api/votables', votableRouter);
   app.use('/api/votes', voteRouter);
