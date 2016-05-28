@@ -1,25 +1,19 @@
 # senter [![Build Status](https://travis-ci.org/eternal44/senter.svg?branch=develop)](https://travis-ci.org/eternal44/senter)
 
-Dev Installation:
+## Dev Installation:
 ```
 npm install babel-cli -g
+npm install gulp-cli -g
 npm install babel-tape-runner -g
 ```
 
-Deploy:
-Push to the repo's production branch
+## Deploy:
+Push to the production branch and load sql files to heroku.  You must have heroku authentication:
 
-Load sql files to heroku.  Must have heroku authentication:
+```bash
 heroku pg:psql --app senter < server/db/scripts/schema.sql
 heroku pg:psql --app senter < server/db/scripts/mockData.sql
+```
 
-
-
-TODO:
-
-SERVERSIDE:
-deploy app
-make each vote unique - never have someone vote for the same item twice
-
-MACHINE LEARNING:
-use Neo4j for unsupervised learning - determine correlations between demographics & votable categories
+## Roadmap
+I'll be working with new technology and experimenting with different design patterns and architectures.  If you'd like to suggest changes or additions I'd be more than happy to talk about them!
