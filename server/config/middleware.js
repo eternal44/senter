@@ -5,7 +5,7 @@ import bodyParser from 'body-parser';
 import {join} from 'path';
 
 // //example code.  uncomment this line if page doesn't load
-// import React from 'react';
+import React from 'react';
 
 export default (app, express) => {
   const votableRouter = express.Router();
@@ -16,7 +16,7 @@ export default (app, express) => {
 
   app.use(express.static(join(__dirname, './../../')));
 
-  app.use('/', express.static('./../../client'));
+  app.use('/static', express.static(join(__dirname, './../../dclient')));
   app.use('/scripts', express.static(join(__dirname, './../../node_modules')));
   app.use(morgan('dev'));
 
@@ -35,9 +35,6 @@ export default (app, express) => {
   })
 
   // example code
-  app.get("/static/bundle.js", function(req, res) {
-    res.sendFile("bundle.js", {root: __dirname})
-  })
 
   app.use('/api/votables', votableRouter);
   app.use('/api/votes', voteRouter);
