@@ -20,22 +20,6 @@ export default (app, express) => {
   app.use('/scripts', express.static(join(__dirname, './../../node_modules')));
   app.use(morgan('dev'));
 
-  // example code
-  app.get("/", (req, res) => {
-    res.send(`<!DOCTYPE html>
-    <html>
-      <head>
-        <title>2.x Flux with redux</title>
-      </head>
-      <body>
-        <div id="root"></div>
-        <script type="text/javascript" src="/static/bundle.js"></script>
-      </body>
-    </html>`)
-  })
-
-  // example code
-
   app.use('/api/votables', votableRouter);
   app.use('/api/votes', voteRouter);
 
