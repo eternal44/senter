@@ -12,7 +12,7 @@
     "db:mock": "psql senter < server/db/scripts/mockData.sql",
     "watch": "npm run watch:server & npm run watch:client & wait",
     "watch:server": "nodemon --exec babel-node --ignore dclient/bundle.js -- server/server.js",
-    "watch:client": "watchify client/site.js -v -t babelify -g envify -p livereactload -o dclient/bundle.js",
+    "watch:client": "watchify client/index.js -v -t babelify -g envify -p livereactload -o dclient/bundle.js",
     "test:server": "babel-tape-runner specs/server/**/*.js",
     "test:dev": "nodemon --exec babel-node -q -x 'npm run test:server | tap-spec'",
     "build:server": "rm -rf dserver && babel server -d dserver",

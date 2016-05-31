@@ -1,8 +1,12 @@
 import { combineReducers } from 'redux';
-import counter from './counter';
+import VotablesReducer from './reducer_votables';
+import UpvoteReducer from './reducer_upvote';
+import DownvoteReducer from './reducer_downvote';
 
 const rootReducer = combineReducers({
-  counter
+  votables: VotablesReducer,
+  upvote: UpvoteReducer,
+  downvote: DownvoteReducer
 });
 
 export default rootReducer;
