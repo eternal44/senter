@@ -1,13 +1,13 @@
-export function downvote(vote) {
+export function downvote(votable, vote) {
   return {
     type: 'DOWNVOTE',
-    payload: vote
+    payload: {votable: votable, vote: vote}
   }
 }
 
-export function upvote(vote) {
+export function upvote(votable, vote) {
   return {
     type: 'UPVOTE',
-    payload: vote
+    payload: {votable: votable, vote: vote}
   }
 }
