@@ -16,7 +16,7 @@
     "test:server": "babel-tape-runner specs/server/**/*.js",
     "test:dev": "nodemon --exec babel-node -q -x 'npm run test:server | tap-spec'",
     "build:server": "rm -rf dserver && babel server -d dserver",
-    "build:client": "rm -rf dclient && mkdir dclient && browserify client/site.js -t babelify -g envify -o dclient/bundle.js",
+    "build:client": "rm -rf dclient && mkdir dclient && browserify client/index.js -t babelify -g envify -o dclient/bundle.js",
     "start": "node dserver/server.js",
     "postinstall": "npm run build:server && npm run build:client"
   },

@@ -1,9 +1,11 @@
 export default function(state = null, action) {
   switch(action.type) {
     case 'UPVOTE':
+      debugger
+      return action.payload
     case 'DOWNVOTE':
-      // TODO:
-      // unshift votables and make votables[0] new currentVotable
+      debugger
+      return action.payload
   }
 
   return state
