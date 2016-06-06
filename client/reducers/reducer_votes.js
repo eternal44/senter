@@ -1,11 +1,19 @@
 import axios from 'axios'
-const ROOT_URL = 'localhost:3000'
 
 export default function(state = [], action) {
-  console.log(state)
+  let vote
+  if(action.payload) {
+    vote = {
+      userID: action.payload.votable.user_id,
+      votableID: action.payload.votable.votable_id,
+      vote: action.payload.vote
+    }
+  }
+
+  // Sending off a batch of votes to reduce the number of server calls
   if(state.length > 19) {
-    axios.post(`${ROOT_URL}/api/votes`, state)
-    // as per Dan - this isn't mutating the state.  it's simply reassigning the reference
+    axios.post('/api/votes', state)
+    // This isn't mutating the state.  It's simply reassigning the reference
     state = []
   }
 
@@ -13,12 +21,12 @@ export default function(state = [], action) {
     case 'UPVOTE':
       return [
         ...state,
-        action.payload
+        vote
       ]
     case 'DOWNVOTE':
       return [
         ...state,
-        action.payload
+        vote
       ]
     default:
       return state
