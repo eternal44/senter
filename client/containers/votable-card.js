@@ -1,22 +1,17 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {upvote, downvote} from '../actions/index'
+import {upvote, downvote, fetchVotablesForVote} from '../actions/index'
 import {bindActionCreators} from 'redux'
 
 class VotableCard extends Component {
-  constructor(props) {
-    super(props)
-
-    // play with this later
-    // this.state = this.props.votables[0]
-
-    // should it be a reference to a fetchVotable function?
-    // this.fetchNextVotable = this.fetchNextVotable.bind(this)
+  componentWillMount() {
+    this.props.fetchVotablesForVote()
   }
+
   render() {
-    const currentVotable = this.props.votables[0]
-    if(!this.props.votables) {
-      return <div>Keep trying</div>
+    const currentVotable = this.props.currentVotable
+    if(!this.props.currentVotable) {
+      return <div>Keep trying!</div>
     }
 
     document.onkeydown = function(e){
@@ -39,14 +34,15 @@ class VotableCard extends Component {
 
 function mapStateToProps(state) {
   return {
-    votables: state.votables
+    currentVotable: state.votables.currentVotable
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    upvote: upvote,
-    downvote: downvote
+    upvote,
+    downvote,
+    fetchVotablesForVote
   }, dispatch)
 }
 
