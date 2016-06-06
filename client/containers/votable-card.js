@@ -21,9 +21,9 @@ class VotableCard extends Component {
 
     document.onkeydown = function(e){
       if(e.which === 37) {
-        console.log('left')
+        this.props.downvote(currentVotable, true)()
       } else if(e.which === 39) {
-        console.log('right')
+        this.props.upvote(currentVotable, true)()
       }
     };
 
