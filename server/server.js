@@ -6,8 +6,6 @@ import express from 'express';
 import {join} from 'path';
 import middleware from './config/middleware';
 
-// connect to database
-
 const app = express();
 
 middleware(app, express, join);
