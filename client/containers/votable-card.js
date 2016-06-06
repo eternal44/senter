@@ -4,11 +4,29 @@ import {upvote, downvote} from '../actions/index'
 import {bindActionCreators} from 'redux'
 
 class VotableCard extends Component {
+  constructor(props) {
+    super(props)
+
+    // play with this later
+    // this.state = this.props.votables[0]
+
+    // should it be a reference to a fetchVotable function?
+    // this.fetchNextVotable = this.fetchNextVotable.bind(this)
+  }
   render() {
     const currentVotable = this.props.votables[0]
     if(!this.props.votables) {
       return <div>Keep trying</div>
     }
+
+    document.onkeydown = function(e){
+      if(e.which === 37) {
+        console.log('left')
+      } else if(e.which === 39) {
+        console.log('right')
+      }
+    };
+
     return (
       <div>
         <div>Name: {currentVotable.name}</div>
