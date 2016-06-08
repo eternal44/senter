@@ -14,11 +14,13 @@ class VotableCard extends Component {
       return <div>Keep trying!</div>
     }
 
+    const that = this
+
     document.onkeydown = function(e){
       if(e.which === 37) {
-        this.props.downvote(currentVotable, true)()
+        that.props.downvote(currentVotable, true)
       } else if(e.which === 39) {
-        this.props.upvote(currentVotable, true)()
+        that.props.upvote(currentVotable, true)
       }
     };
 
