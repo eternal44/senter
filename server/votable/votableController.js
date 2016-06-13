@@ -22,9 +22,10 @@ export default {
 
   fetchUnvotedVotables: function(req, res) {
     const userID = req.params.userID;
-    db.many(['SELECT name, make, photo_url, votable_id FROM votables LEFT JOIN votes ',
-            'ON votables.id = votes.votable_id ',
-            'WHERE voter IS null OR voter !=$1 LIMIT 20'].join(''), userID)
+    db.many(['SELECT name, make, photo_url, votables.id AS votable_id ',
+            'FROM votables LEFT JOIN votes ON votables.id = votes.votable_id ',
+            'WHERE votables.id NOT IN (SELECT votes.votable_id FROM votes ',
+            'WHERE voter=$1) LIMIT 20'].join(''), userID)
     .then(data => {
       res.send(data);
     })
