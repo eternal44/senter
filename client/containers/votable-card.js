@@ -14,13 +14,16 @@ class VotableCard extends Component {
       return <div>Keep trying!</div>
     }
 
+    if(this.props.unvotedVotables.length < 5)
+      this.props.fetchVotablesForVote()
+
     const that = this
 
     document.onkeydown = function(e){
       if(e.which === 37) {
         that.props.downvote(currentVotable, true)
       } else if(e.which === 39) {
-        that.props.upvote(currentVotable, true)
+        that.props.upvote(currentVotable, false)
       }
     };
 
@@ -36,7 +39,8 @@ class VotableCard extends Component {
 
 function mapStateToProps(state) {
   return {
-    currentVotable: state.votables.currentVotable
+    currentVotable: state.votables.currentVotable,
+    unvotedVotables: state.votables.unvotedVotables
   }
 }
 
