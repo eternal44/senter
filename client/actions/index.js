@@ -14,6 +14,22 @@ export function upvote(votable, vote) {
   }
 }
 
+export function postVotes(votes) {
+  // return (dispatch, getState) => {
+  //   axios.post('/api/votes', votes)
+  //   .then(function() {
+  //     dispatch(fetchVotablesForVote())
+  //   })
+  //   .catch(function(err) {
+  //     console.log(err)
+  //   })
+  // }
+
+  return {
+    type: 'POST_VOTES'
+  }
+}
+
 export function fetchVotablesForVote() {
   const request = axios.get('/api/votables/users/1')
 

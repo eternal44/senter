@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {upvote, downvote, fetchVotablesForVote} from '../actions/index'
+import {upvote, downvote, postVotes, fetchVotablesForVote} from '../actions/index'
 import {bindActionCreators} from 'redux'
+import async from 'async'
 
 class VotableCard extends Component {
   componentWillMount() {
@@ -14,8 +15,9 @@ class VotableCard extends Component {
       return <div>Keep trying!</div>
     }
 
-    if(this.props.unvotedVotables.length < 5)
-      this.props.fetchVotablesForVote()
+    if(this.props.unvotedVotables.length < 5){
+      this.props.postVotes(this.props.votes)
+    } 
 
     const that = this
 
@@ -48,6 +50,7 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     upvote,
     downvote,
+    postVotes,
     fetchVotablesForVote
   }, dispatch)
 }

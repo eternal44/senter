@@ -12,12 +12,6 @@ let buildVote = (action) => {
 }
 
 export default function(state = [], action) {
-  // Sending off a batch of votes to reduce the number of server calls
-  if(state.length > 15) {
-    axios.post('/api/votes', state)
-    // This isn't mutating the state.  It's simply reassigning the reference
-    state = []
-  }
   let vote
 
   switch (action.type) {
@@ -35,6 +29,11 @@ export default function(state = [], action) {
         ...state,
         vote
       ]
+    case 'POST_VOTES':
+      axios.post('/api/votes', state)
+
+      // This isn't mutating the state.  It's simply reassigning the reference
+      return state = []
     default:
       return state
   }

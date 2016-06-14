@@ -5,7 +5,7 @@ import reducers from '../reducers';
 
 export default function configureStore(initialState) {
   const store = createStore(reducers, initialState, compose(
-    applyMiddleware(promise),
+    applyMiddleware(thunk, promise),
     window.devToolsExtension ? window.devToolsExtension() : f => f
   ));
 
