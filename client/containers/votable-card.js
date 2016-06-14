@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {upvote, downvote, postVotes, fetchVotablesForVote} from '../actions/index'
+import {upvote, downvote, postVotesThunk, fetchVotablesForVote} from '../actions/index'
 import {bindActionCreators} from 'redux'
 import async from 'async'
 
@@ -15,9 +15,7 @@ class VotableCard extends Component {
       return <div>Keep trying!</div>
     }
 
-    if(this.props.unvotedVotables.length < 5){
-      this.props.postVotes(this.props.votes)
-    } 
+    this.props.postVotesThunk(this.props.votes)
 
     const that = this
 
@@ -50,7 +48,7 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     upvote,
     downvote,
-    postVotes,
+    postVotesThunk,
     fetchVotablesForVote
   }, dispatch)
 }

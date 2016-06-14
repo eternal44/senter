@@ -30,8 +30,6 @@ export default function(state = [], action) {
         vote
       ]
     case 'POST_VOTES':
-      axios.post('/api/votes', state)
-
       // This isn't mutating the state.  It's simply reassigning the reference
       return state = []
     default:
