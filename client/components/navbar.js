@@ -10,6 +10,9 @@ export default ()=> {
           <li className="nav-item">
             <Link to="instructions/" className="nav-link">Instrucions</Link>
           </li>
+          <li>
+            <Link to="about/" className="nav-link">About</Link>
+          </li>
         </ul>
       </nav>
     </div>
