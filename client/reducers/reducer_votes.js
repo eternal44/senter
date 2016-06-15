@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 let buildVote = (action) => {
   // TODO:dynamically assing user ID
   const vote = {

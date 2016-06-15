@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {upvote, downvote, postVotesThunk, fetchVotablesForVote} from '../actions/index'
 import {bindActionCreators} from 'redux'
-import async from 'async'
 
 class VotableCard extends Component {
   componentWillMount() {
@@ -12,9 +11,11 @@ class VotableCard extends Component {
   render() {
     const currentVotable = this.props.currentVotable
     if(!this.props.currentVotable) {
-      return <div>Keep trying!</div>
+      return <div>No more items to vote!</div>
     }
 
+    // this method monitors the length of votes and does
+    // a POST request when there are enough votes
     this.props.postVotesThunk(this.props.votes)
 
     const that = this
@@ -28,10 +29,17 @@ class VotableCard extends Component {
     };
 
     return (
-      <div>
-        <div>Name: {currentVotable.name}</div>
-        <button onClick = {() => this.props.upvote(currentVotable, true)}>Upvote</button>
-        <button onClick = {() => this.props.downvote(currentVotable, false)}>Downvote</button>
+      <div className='container'>
+        <div className='pull-left col-xs-6 box-shadow'>
+          <h3>{currentVotable.name}</h3>
+          <div>By: {currentVotable.make}</div>
+          <img src={currentVotable.photo_url}></img>
+
+          <div className='text-center'>
+            <button className="btn-default btn-lg btn-round" onClick = {() => this.props.downvote(currentVotable, false)}>Downvote</button>
+            <button className="btn-primary btn-lg btn-round" onClick = {() => this.props.upvote(currentVotable, true)}>Upvote</button>
+          </div>
+        </div>
       </div>
     )
   }

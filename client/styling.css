@@ -1,0 +1,9 @@
+.box-shadow {
+  border-style: solid;
+  border-color: #e6e6e6;
+}
+
+.btn-round {
+  border-radius: 10px;
+  margin: 5px;
+}
