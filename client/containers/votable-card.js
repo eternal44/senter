@@ -29,13 +29,15 @@ class VotableCard extends Component {
     };
 
     return (
-      <div className='container'>
-        <div className='pull-left col-xs-6 box-shadow'>
+      <div className="container">
+        <div className="pull-left col-xs-6 box-shadow">
           <h3>{currentVotable.name}</h3>
           <div>By: {currentVotable.make}</div>
-          <img src={currentVotable.photo_url}></img>
+          <div className="text-center">
+            <img src={currentVotable.photo_url}></img>
+          </div>
 
-          <div className='text-center'>
+          <div className="text-center">
             <button className="btn-default btn-lg btn-round" onClick = {() => this.props.downvote(currentVotable, false)}>Downvote</button>
             <button className="btn-primary btn-lg btn-round" onClick = {() => this.props.upvote(currentVotable, true)}>Upvote</button>
           </div>
