@@ -7,3 +7,11 @@
   border-radius: 10px;
   margin: 5px;
 }
+
+.navbar {
+  background-color: #18bc9c;
+}
+
+a {
+  color: inherit;
+}
