@@ -18,3 +18,16 @@ img {
   max-width: 400px; 
   max-height: 400px;
 }
+
+.navbar-default .navbar-brand {
+  /* text-decoration: none; */
+  /* text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); */
+  color:  black;
+}
+
+.navbar .nav > li > a {
+  float: none;
+  text-decoration: none;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  color:  black;
+}
