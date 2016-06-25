@@ -1,11 +1,25 @@
 import React, {Component} from 'react'
+
+const Pinterest = require('../util/pinterest')
+
 import {connect} from 'react-redux'
 import {upvote, downvote, postVotesThunk, fetchVotablesForVote} from '../actions/index'
 import {bindActionCreators} from 'redux'
 
 class VotableCard extends Component {
+  constructor(props, context) {
+    super(props)
+    context.router
+  }
+
   componentWillMount() {
     this.props.fetchVotablesForVote()
+  }
+
+  componentDidMount() {
+    if (!Pinterest.loggedIn()) {
+      return this.context.router.push('login')
+    }
   }
 
   render() {
@@ -61,6 +75,10 @@ function mapDispatchToProps(dispatch) {
     postVotesThunk,
     fetchVotablesForVote
   }, dispatch)
+}
+
+VotableCard.contextTypes = {
+  router: React.PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(VotableCard)

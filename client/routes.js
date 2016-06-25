@@ -9,8 +9,8 @@ import Login from './components/login'
 
 export default (
   <Route path="/" component={App}>
-    <Redirect from="/" to="login" />
     <IndexRoute component={VotableCard} />
+    <Route path="login" component={Login}/>
     <Route path="instructions/" component={Instructions} />
     <Route path="about/" component={About} />
   </Route>

@@ -12,7 +12,7 @@ class Login extends Component {
 
   componentDidMount() {
     if(this.state.pinterest) {
-      this.context.router.transitionTo('feed')
+      this.context.router.transitionTo('/')
     }
   }
 
