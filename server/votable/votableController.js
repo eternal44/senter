@@ -30,8 +30,8 @@ export default {
       res.send(data);
     })
     .catch (error => {
-      console.log('No votables found. Error: ', error);
-      res.send('No votables found!');
+      next(error)
+      throw error
     });
   }
 };
