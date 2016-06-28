@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router'
-import LoginButton from './login'
+import Logout from './logout'
 
 export default ()=> {
   return (
@@ -16,7 +16,7 @@ export default ()=> {
                 <Link to="about/" className="nav-link">About</Link>
               </li>
               <li className="nav-item">
-                <a href="#">Login</a>
+                <Logout />
               </li>
             </ul>
         </nav>

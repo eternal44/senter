@@ -8,7 +8,7 @@ import {bindActionCreators} from 'redux'
 
 class VotableCard extends Component {
   constructor(props, context) {
-    super(props)
+    super(props, context)
     context.router
   }
 
@@ -78,7 +78,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 VotableCard.contextTypes = {
-  router: React.PropTypes.func.isRequired
+  router: React.PropTypes.object.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(VotableCard)

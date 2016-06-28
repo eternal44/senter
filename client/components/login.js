@@ -3,16 +3,17 @@ import Pinterest from '../util/pinterest'
 
 class Login extends Component {
   constructor(props, context) {
-    super(props, context)
+    super(props)
     this.state = {
       pinterest: Pinterest.loggedIn()
     }
     this.resetState = this.resetState.bind(this)
+    context.router
   }
 
   componentDidMount() {
     if(this.state.pinterest) {
-      this.context.router.transitionTo('/')
+      this.context.router.push('/')
     }
   }
 
@@ -22,7 +23,7 @@ class Login extends Component {
     }
 
     if(state.pinterest) {
-      this.context.router.transitionTo('/')
+      this.context.router.push('/')
     } else {
       this.setState(state)
     }
@@ -61,7 +62,7 @@ class Login extends Component {
 }
 
 Login.contextTypes = {
-  router: React.PropTypes.func.isRequired
+  router: React.PropTypes.object.isRequired
 }
 
 module.exports = Login
