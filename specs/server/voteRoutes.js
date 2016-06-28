@@ -20,8 +20,8 @@ test('Check votable votes before new votes', assert => {
   .expect('Content-Type', /json/)
   .end((err, res) => {
     const actualVotable = res.body.name;
-    const downvotes = parseInt(res.body.downvotes);
-    const upvotes = parseInt(res.body.upvotes);
+    const downvotes = parseInt(res.body.downvotes, 10);
+    const upvotes = parseInt(res.body.upvotes, 10);
 
     assert.error(err, 'No error');
     assert.same(actualVotable, 'item1', 'Retrieve first votable');

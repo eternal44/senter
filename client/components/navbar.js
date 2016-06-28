@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router'
+import Logout from './logout'
 
 export default ()=> {
   return (
@@ -13,6 +14,9 @@ export default ()=> {
               </li>
               <li className="nav-item">
                 <Link to="about/" className="nav-link">About</Link>
+              </li>
+              <li className="nav-item">
+                <Logout />
               </li>
             </ul>
         </nav>
