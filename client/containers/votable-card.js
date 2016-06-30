@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 const Pinterest = require('../util/pinterest')
 
 import {connect} from 'react-redux'
-import {upvote, downvote, postVotesThunk, fetchVotablesForVote} from '../actions/index'
+import {upvote, downvote, postVotesThunk, fetchVotablesForVote, postNewVotables} from '../actions/index'
 import {bindActionCreators} from 'redux'
 
 class VotableCard extends Component {
@@ -20,6 +20,11 @@ class VotableCard extends Component {
     if (!Pinterest.loggedIn()) {
       return this.context.router.push('login')
     }
+
+    Pinterest.myPins(response => {
+      this.props.postNewVotables(response.data)
+    })
+
   }
 
   render() {
@@ -73,7 +78,8 @@ function mapDispatchToProps(dispatch) {
     upvote,
     downvote,
     postVotesThunk,
-    fetchVotablesForVote
+    fetchVotablesForVote,
+    postNewVotables
   }, dispatch)
 }
 

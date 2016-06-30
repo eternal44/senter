@@ -29,8 +29,11 @@ const Pinterest = {
     PDK.request('/pins/', 'POST', data, callback)
   },
 
-  myBoards: function(callback) {
-    PDK.me('boards', {fields: Const.PIN_FIELDS}, callback)
+  /* See Pinterest's API endpoints for a list of all possible endpoints:
+   * https://developers.pinterest.com/docs/api/pins/
+   */
+  myPins: function(callback) {
+    PDK.me('pins', {fields: 'id,note,image,url,board,counts'}, callback)
   }
 }
 

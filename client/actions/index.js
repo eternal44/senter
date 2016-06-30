@@ -46,3 +46,12 @@ export function fetchVotablesForVote() {
     payload: request
   }
 }
+
+export function postNewVotables(data) {
+  return () => {
+    axios.post('/api/votables', data)
+    .catch(err => {
+      console.log(err)
+    })
+  }
+}
