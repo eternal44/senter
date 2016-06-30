@@ -1,6 +1,8 @@
 import test from 'tape';
 import request from 'supertest';
 import app from '../../server/server.js';
+import mockVotables from '../fixtures/mockVotables'
+
 const exec = require('child_process').exec;
 
 test('SETUP: insert mocks  DB', t => {
@@ -30,3 +32,15 @@ test('Fetch unvoted votables', assert => {
     assert.end();
   });
 });
+
+test('Post new votables', assert => {
+  request(app)
+  .post('/api/votables/')
+  .send(mockVotables)
+  .expect(201)
+  .expect('Content-Type', "text/plain;")
+  .end((err, res) => {
+    assert.error(err, 'No error')
+    assert.end()
+  })
+})
