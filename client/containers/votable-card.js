@@ -22,6 +22,7 @@ class VotableCard extends Component {
     }
 
     Pinterest.myPins(response => {
+      // passes a user's pins to the db along with their pinterest ID
       this.props.postNewVotables(response.data)
     })
 

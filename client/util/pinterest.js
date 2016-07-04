@@ -33,7 +33,11 @@ const Pinterest = {
    * https://developers.pinterest.com/docs/api/pins/
    */
   myPins: function(callback) {
-    PDK.me('pins', {fields: 'id,note,image,url,board,counts'}, callback)
+    PDK.me('pins', {fields: 'id,note,image,url,board,counts,creator'}, callback)
+  },
+
+  getSession: function() {
+    return PDK.getSession()
   }
 }
 

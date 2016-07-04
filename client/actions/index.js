@@ -47,7 +47,11 @@ export function fetchVotablesForVote() {
   }
 }
 
-export function postNewVotables(data) {
+export function postNewVotables(allPins) {
+  const data = {
+    pins: allPins,
+  }
+
   return () => {
     axios.post('/api/votables', data)
     .catch(err => {
