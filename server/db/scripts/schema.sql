@@ -19,6 +19,7 @@ detailed & granular manner.  You can think of categories a general description f
 DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
+  pinterest_id BIGINT,
   email VARCHAR(50) UNIQUE,
   name VARCHAR(30),
   vote_weight INTEGER DEFAULT 1
@@ -50,9 +51,9 @@ DROP TABLE IF EXISTS votables CASCADE;
 CREATE TABLE votables (
   id SERIAL PRIMARY KEY,
   user_id INTEGER,
-  name VARCHAR(50),
-  make VARCHAR(50),
-  photo_url VARCHAR(200),
+  pinterest_url VARCHAR(50),
+  pinterest_note VARCHAR(50),
+  image_url VARCHAR(200),
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
