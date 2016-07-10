@@ -14,8 +14,8 @@ insert pinterest IDs & other user info
  */
 
 
-INSERT INTO users (email, name, pinterest_id) VALUES ('example1@example.com', 'name1', 140808063257991824);
-INSERT INTO users (email, name, pinterest_id) VALUES ('example2@example.com', 'name2', 240808063257991824);
+INSERT INTO users (email, name, pinterest_id) VALUES ('example1@example.com', 'name1', 140808063257991);
+INSERT INTO users (email, name, pinterest_id) VALUES ('example2@example.com', 'name2', 240808063257991);
 
 INSERT INTO demographics (name) VALUES ('hipster');
 INSERT INTO demographics (name) VALUES ('hiphop');
