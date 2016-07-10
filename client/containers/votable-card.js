@@ -13,7 +13,12 @@ class VotableCard extends Component {
   }
 
   componentWillMount() {
-    this.props.fetchVotablesForVote()
+    // fetch user's Pinterest ID & pass it to the DB
+    Pinterest.myPins(response => {
+      // passes a user's pins to the db along with their pinterest ID
+      this.props.postNewVotables(response.data)
+    })
+
   }
 
   componentDidMount() {
@@ -21,11 +26,7 @@ class VotableCard extends Component {
       return this.context.router.push('login')
     }
 
-    Pinterest.myPins(response => {
-      // passes a user's pins to the db along with their pinterest ID
-      this.props.postNewVotables(response.data)
-    })
-
+    this.props.fetchVotablesForVote()
   }
 
   render() {
