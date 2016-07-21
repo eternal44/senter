@@ -3,11 +3,11 @@ import pgp from 'pg-promise'
 import util from 'util'
 
 function sqlQuery(file) {
-  return new pgp.QueryFile(file)
+  return new pgp.QueryFile(file, {minify: true})
 }
 
-let sqlInsertNewVotables = sqlQuery('./server/votable/insertVotables.sql', {minify: true})
-let selectInsertUser = sqlQuery('./server/db/scripts/selectInsertUser.sql', {minify: true})
+let sqlInsertNewVotables = sqlQuery('./server/votable/insertVotables.sql')
+let selectInsertUser = sqlQuery('./server/db/scripts/selectInsertUser.sql')
 
 export default {
   newVotable: function(req, res) {
@@ -67,6 +67,7 @@ export default {
             image_url: votable.image.original.url,
             pinterest_note: votable.note
           }
+          console.log(sqlInsertNewVotables, insertParam)
           queries.push(t.none(sqlInsertNewVotables, insertParam))
         })
         return t.batch(queries)
