@@ -20,9 +20,11 @@ if (require.main === module) {
     https.createServer({
       key: fs.readFileSync('key.pem'),
       cert: fs.readFileSync('cert.pem')
-    }, app).listen(port)
+    }, app).listen(port, () => {
+      console.log('Listening on port ', port);
+    })
   } else {
-
+    // TODO: add SSL key & cert in production env
     app.listen(port, () => {
       console.log('Listening on port ', port);
     });

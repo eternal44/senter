@@ -46,3 +46,17 @@ export function fetchVotablesForVote() {
     payload: request
   }
 }
+
+// using an object to pass in all pinsbecause that's what redux expects
+export function postNewVotables(allPins) {
+ 
+  const data = {
+    allPins: allPins
+  }
+  return () => {
+    axios.post('/api/votables', data)
+    .catch(err => {
+      console.log(err)
+    })
+  }
+}

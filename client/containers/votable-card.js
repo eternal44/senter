@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 const Pinterest = require('../util/pinterest')
 
 import {connect} from 'react-redux'
-import {upvote, downvote, postVotesThunk, fetchVotablesForVote} from '../actions/index'
+import {upvote, downvote, postVotesThunk, fetchVotablesForVote, postNewVotables} from '../actions/index'
 import {bindActionCreators} from 'redux'
 
 class VotableCard extends Component {
@@ -13,13 +13,20 @@ class VotableCard extends Component {
   }
 
   componentWillMount() {
-    this.props.fetchVotablesForVote()
+    // fetch user's Pinterest ID & pass it to the DB
+    Pinterest.myPins(response => {
+      // passes a user's pins to the db along with their pinterest ID
+      this.props.postNewVotables(response.data)
+    })
+
   }
 
   componentDidMount() {
     if (!Pinterest.loggedIn()) {
       return this.context.router.push('login')
     }
+
+    this.props.fetchVotablesForVote()
   }
 
   render() {
@@ -45,10 +52,10 @@ class VotableCard extends Component {
     return (
       <div className="container">
         <div className="text-center well">
-          <h3>{currentVotable.name}</h3>
-          <div id="votable-make">By: {currentVotable.make}</div>
+          <h3>{currentVotable.pinterest_note}</h3>
+          <div id="pinterest-url">By: {currentVotable.pinterest_url}</div>
           <div className="text-center">
-            <img src={currentVotable.photo_url}></img>
+            <img src={currentVotable.image_url}></img>
           </div>
 
           <div id="vote-buttons" className="text-center">
@@ -73,7 +80,8 @@ function mapDispatchToProps(dispatch) {
     upvote,
     downvote,
     postVotesThunk,
-    fetchVotablesForVote
+    fetchVotablesForVote,
+    postNewVotables
   }, dispatch)
 }
 
