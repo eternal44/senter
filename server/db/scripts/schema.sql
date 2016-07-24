@@ -51,9 +51,9 @@ DROP TABLE IF EXISTS votables CASCADE;
 CREATE TABLE votables (
   id SERIAL PRIMARY KEY,
   user_id INTEGER,
-  pinterest_url VARCHAR(50),
-  pinterest_note VARCHAR(50),
-  image_url VARCHAR(200),
+  pinterest_url VARCHAR(250),
+  pinterest_note VARCHAR(250),
+  image_url VARCHAR(250),
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
 

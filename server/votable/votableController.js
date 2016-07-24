@@ -67,17 +67,18 @@ export default {
             image_url: votable.image.original.url,
             pinterest_note: votable.note
           }
-          console.log(sqlInsertNewVotables, insertParam)
+          // console.log(sqlInsertNewVotables, insertParam)
           queries.push(t.none(sqlInsertNewVotables, insertParam))
         })
         return t.batch(queries)
       })
-      .catch(function(err) {
-        console.log('Votables not stored')
-        res.status(500).send(err)
-      })
       .then(() => {
         res.sendStatus(201)
+      })
+      .catch(function(err) {
+        console.log(queries)
+        console.log('Votables not stored')
+        res.status(500).send(err)
       })
     })
   }
