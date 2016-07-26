@@ -76,7 +76,6 @@ export default {
         res.sendStatus(201)
       })
       .catch(function(err) {
-        console.log(queries)
         console.log('Votables not stored')
         res.status(500).send(err)
       })
