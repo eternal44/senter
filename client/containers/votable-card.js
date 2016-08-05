@@ -53,7 +53,7 @@ class VotableCard extends Component {
       <div className="container">
         <div className="text-center well">
           <h3>{currentVotable.pinterest_note}</h3>
-          <div id="pinterest-url">By: {currentVotable.pinterest_url}</div>
+          <a href="{currentVotable.pinterest_url}" id="pinterest-url">Click for Pinterest link</a>
           <div className="text-center">
             <img src={currentVotable.image_url}></img>
           </div>
